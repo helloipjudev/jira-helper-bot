@@ -26,3 +26,6 @@ async def github_webhook(request: Request):
         await send_slack_message(pr_title, pr_url, pr_author)
 
     return {"message": "Received"}
+
+
+
