@@ -49,8 +49,7 @@ async def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
         ]
     }
 
-    # response = requests.post(SLACK_WEBHOOK_URL, headers=headers, json=payload)
-    response = requests.post("https://hooks.slack.com/services/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", headers=headers, json=payload)
+    response = requests.post(SLACK_WEBHOOK_URL, headers=headers, json=payload)
 
     if response.status_code == 200:
         print("✅ Slack 메시지 전송 성공!")
