@@ -29,4 +29,5 @@ uvloop==0.16.0
 watchgod==0.8.2
 websockets==10.3
 httpx
-pydantic-settings
+pydantic>=2.0.1
+pydantic-settings>=2.0.1
