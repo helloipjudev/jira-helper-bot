@@ -48,7 +48,7 @@ async def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
             }
         ]
     }
-
+    logger.info(f"🚀  {SLACK_WEBHOOK_URL}")
     response = requests.post(SLACK_WEBHOOK_URL, headers=headers, json=payload)
 
     if response.status_code == 200:

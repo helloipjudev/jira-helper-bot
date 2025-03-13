@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 JIRA_DOMAIN = os.getenv("JIRA_DOMAIN")
