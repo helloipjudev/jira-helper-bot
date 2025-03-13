@@ -47,7 +47,7 @@ async def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
             }
         ]
     }
-    logger.info("Slack 웹훅 URL이 설정되었습니다.")  # 수정된 로깅 메시지
+    logger.info(f"Slack 웹훅 URL이 설정되었습니다: {SLACK_WEBHOOK_URL}")  # 수정된 로깅 메시지
     response = requests.post(SLACK_WEBHOOK_URL, headers=headers, json=payload)
 
     if response.status_code == 200:
