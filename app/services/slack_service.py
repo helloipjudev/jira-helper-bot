@@ -2,7 +2,11 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+import logging  # 로깅 모듈 추가
 
+# 로깅 설정
+logging.basicConfig(level=logging.INFO)  # 로그 레벨 설정
+logger = logging.getLogger(__name__)  # 로거 인스턴스 생성
 
 
 load_dotenv(override=True)
