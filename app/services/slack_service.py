@@ -51,7 +51,7 @@ def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
         ]
     }
 
-    response = requests.post("SLACK_WEBHOOK_URL", headers=headers, json=payload)
+    response = requests.post(SLACK_WEBHOOK_URL, headers=headers, json=payload)
 
     if response.status_code == 200:
         print("✅ Slack 메시지 전송 성공!")
@@ -61,7 +61,7 @@ def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
 
 # 테스트 실행
 if __name__ == "__main__":
-    send_slack_pr_notification(
+    send_slack_message(
         pr_title="🚀 새 기능 추가: AI 챗봇 업그레이드",
         pr_author="PotatoArtie",
         pr_url="https://github.com/helloipjudev/apis/pull/725"
