@@ -13,6 +13,8 @@ router = APIRouter()
 async def create_ticket(request: Request):
     """Slack에서 버튼 클릭 시 JIRA 티켓을 생성하는 API"""
 
+    logger.info("🔄 JIRA 티켓 생성 요청 시작")  # 요청 시작 로깅
+
     try:
         # 📌 Slack에서 보낸 요청 데이터 확인
         if request.headers.get("content-type") == "application/json":
@@ -47,6 +49,7 @@ async def create_ticket(request: Request):
                     assignee=assignee  
                 )
 
+                logger.info("✅ JIRA 티켓 생성 완료: %s", jira_ticket_id)  # 티켓 생성 완료 로깅
                 return {"message": f"✅ JIRA 티켓 생성 완료: {jira_ticket_id}"}
 
         return {"message": "⚠️ 잘못된 요청입니다."}
@@ -54,3 +57,6 @@ async def create_ticket(request: Request):
     except Exception as e:
         logger.error("❌ JIRA 생성 중 오류 발생: %s", str(e))  # 오류 로그 출력
         return {"error": "JIRA 티켓 생성 실패", "detail": str(e)}
+
+    finally:
+        logger.info("🔄 JIRA 티켓 생성 요청 종료")  # 요청 종료 로깅

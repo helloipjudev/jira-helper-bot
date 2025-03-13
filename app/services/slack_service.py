@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 
 
-load_dotenv()  # .env 파일 로드
+load_dotenv(override=True)
 
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
@@ -56,11 +56,3 @@ async def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
     else:
         print(f"❌ Slack 메시지 전송 실패! 상태 코드: {response.status_code}")
         print(f"응답 내용: {response.text}")
-
-# 테스트 실행
-if __name__ == "__main__":
-    send_slack_pr_notification(
-        pr_title="🚀 새 기능 추가: AI 챗봇 업그레이드",
-        pr_author="PotatoArtie",
-        pr_url="https://github.com/helloipjudev/apis/pull/725"
-    )
