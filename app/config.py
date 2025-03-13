@@ -1,5 +1,7 @@
 import os
 from dotenv import load_dotenv
+from pydantic_settings import BaseSettings
+
 
 load_dotenv(override=True)
 
@@ -11,13 +13,15 @@ JIRA_PROJECT_HELLO_IPJU_KEY = os.getenv("JIRA_PROJECT_HELLO_IPJU_KEY")
 JIRA_PROJECT_PARTNER_KEY = os.getenv("JIRA_PROJECT_PARTNER_KEY")
 
 
-from pydantic import BaseSettings
+
 
 class Settings(BaseSettings):
     SLACK_WEBHOOK_URL: str
 
     class Config:
         env_file = ".env"
+        env_file_encoding = "utf-8"
+        extra = "allow"
 
 # 설정 객체 생성
 settings = Settings()

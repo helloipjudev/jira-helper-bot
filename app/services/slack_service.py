@@ -1,7 +1,5 @@
 import requests
-import json
-import os
-from config import settings 
+from app.config import settings  # 수정된 부분
 import logging  # 로깅 모듈 추가
 
 # 로깅 설정
@@ -49,7 +47,7 @@ async def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
             }
         ]
     }
-    logger.info(f"🚀  {settings.SLACK_WEBHOOK_URL}")
+    logger.info("Slack 웹훅 URL이 설정되었습니다.")  # 수정된 로깅 메시지
     response = requests.post(settings.SLACK_WEBHOOK_URL, headers=headers, json=payload)
 
     if response.status_code == 200:
