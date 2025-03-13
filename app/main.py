@@ -1,10 +1,7 @@
 from fastapi import FastAPI
 from app.routes import github, slack
 
-
 app = FastAPI()
-# app.mount("/", StaticFiles(directory="public", html = True), name="static")
-
 
 app.include_router(github.router)
 app.include_router(slack.router)
