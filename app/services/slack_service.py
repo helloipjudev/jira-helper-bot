@@ -9,7 +9,7 @@ load_dotenv()  # .env 파일 로드
 
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
-def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
+async def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
     headers = {
         "Content-Type": "application/json"
     }
@@ -36,7 +36,6 @@ def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
                         "style": "primary",
                         "action_id": "create_jira_ticket_helloipju",
                         "value": f"{pr_title}||{pr_url}||{pr_author}||IPJU",
-                        "url": "https://port-0-jira-helper-bot-1272llx1jee5l.sel5.cloudtype.app/jira/create-ticket"
                     },
                     {
                         "type": "button",
@@ -44,14 +43,14 @@ def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
                         "style": "danger",
                         "action_id": "create_jira_ticket_partners",
                         "value": f"{pr_title}||{pr_url}||{pr_author}||PTN",
-                        "url": "https://port-0-jira-helper-bot-1272llx1jee5l.sel5.cloudtype.app/jira/create-ticket"
                     }
                 ]
             }
         ]
     }
 
-    response = requests.post(SLACK_WEBHOOK_URL, headers=headers, json=payload)
+    # response = requests.post(SLACK_WEBHOOK_URL, headers=headers, json=payload)
+    response = requests.post("https://hooks.slack.com/services/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", headers=headers, json=payload)
 
     if response.status_code == 200:
         print("✅ Slack 메시지 전송 성공!")
@@ -61,7 +60,7 @@ def send_slack_message(pr_title: str, pr_author: str, pr_url: str):
 
 # 테스트 실행
 if __name__ == "__main__":
-    send_slack_message(
+    send_slack_pr_notification(
         pr_title="🚀 새 기능 추가: AI 챗봇 업그레이드",
         pr_author="PotatoArtie",
         pr_url="https://github.com/helloipjudev/apis/pull/725"
