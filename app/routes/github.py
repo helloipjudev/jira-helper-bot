@@ -15,6 +15,7 @@ router = APIRouter()
 
 # 📌 환경 변수에서 GitHub Webhook Secret 가져오기
 GITHUB_WEBHOOK_SECRET = os.getenv("GITHUB_WEBHOOK_SECRET", "")
+SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
 
 
 def verify_signature(request_body: bytes, signature_header: str):
@@ -45,6 +46,7 @@ async def github_webhook(
     try:
         # 요청 본문 가져오기
         body = await request.body()
+        logger.debug(f"📥 요청 본문 (x_hub_signature_256): {x_hub_signature_256}")
         logger.debug(f"📥 요청 본문 (Raw Body): {body}")
 
         # 📌 서명 검증
