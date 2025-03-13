@@ -9,3 +9,15 @@ JIRA_EMAIL = os.getenv("JIRA_EMAIL")
 JIRA_API_TOKEN = os.getenv("JIRA_API_TOKEN")
 JIRA_PROJECT_HELLO_IPJU_KEY = os.getenv("JIRA_PROJECT_HELLO_IPJU_KEY")
 JIRA_PROJECT_PARTNER_KEY = os.getenv("JIRA_PROJECT_PARTNER_KEY")
+
+
+from pydantic import BaseSettings
+
+class Settings(BaseSettings):
+    SLACK_WEBHOOK_URL: str
+
+    class Config:
+        env_file = ".env"
+
+# 설정 객체 생성
+settings = Settings()
